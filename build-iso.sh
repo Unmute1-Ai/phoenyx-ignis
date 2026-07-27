@@ -28,7 +28,8 @@ apk add --no-cache alpine-sdk alpine-conf syslinux xorriso squashfs-tools \
 mkdir -p "$WORK_DIR" "$DIST"
 
 if ! find /root/.abuild -name '*.rsa' -print -quit 2>/dev/null | grep -q .; then
-  abuild-keygen -a -i -n
+  abuild-keygen -a -n
+  cp /root/.abuild/*.rsa.pub /etc/apk/keys/
 fi
 
 if [ ! -d "$APORTS_DIR/.git" ]; then
