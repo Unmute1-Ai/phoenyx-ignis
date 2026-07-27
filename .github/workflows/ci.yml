@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[dev]'
+      - run: ruff check .
+      - run: pytest
+
+  alpine-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate installation on Alpine 3.20
+        run: |
+          docker run --rm -v "$PWD:/src:ro" alpine:3.20 sh -euxc '
+            apk add --no-cache python3 py3-pip
+            cp -R /src /tmp/phoenyx-ignis
+            python3 -m pip install --break-system-packages --no-deps /tmp/phoenyx-ignis
+            ignis --help
+          '
+
+  bootable-iso:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Phoenyx Ignis ISO on Alpine
+        run: |
+          mkdir -p artifacts
+          docker run --rm -v "$PWD:/src" alpine:3.20 sh -euxc '
+            cp -R /src /work
+            cd /work
+            ./build-iso.sh
+            cp dist/*phoenyx*.iso dist/*phoenyx*.iso.sha256 /src/artifacts/
+          '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phoenyx-ignis-iso
+          path: artifacts/
+          if-no-files-found: error
