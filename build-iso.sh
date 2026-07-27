@@ -36,6 +36,7 @@ if [ ! -d "$APORTS_DIR/.git" ]; then
   git clone --depth 1 --branch "$ALPINE_BRANCH" \
     https://gitlab.alpinelinux.org/alpine/aports.git "$APORTS_DIR"
 fi
+git -C "$APORTS_DIR" fetch --force --tags
 
 cp packaging/mkimg.phoenyx.sh "$APORTS_DIR/scripts/"
 cp packaging/genapkovl-phoenyx.sh "$APORTS_DIR/scripts/"
