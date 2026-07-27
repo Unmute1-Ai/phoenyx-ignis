@@ -29,14 +29,25 @@ ignis wifi scan
 ignis wifi connect "My Network"
 ```
 
-Build an Alpine minirootfs recovery archive (requires root and Alpine):
+Build a bootable Alpine recovery ISO (requires root, Alpine, and network
+access):
+
+```sh
+sudo ./build-iso.sh
+```
+
+The ISO and its SHA-256 checksum are written to `dist/`. It supports UEFI and
+legacy BIOS boot and installs the `ignis` command during startup.
+CI also publishes both files as the `phoenyx-ignis-iso` workflow artifact.
+
+Build an Alpine minirootfs recovery archive instead:
 
 ```sh
 sudo ./build-alpine.sh
 ```
 
-The archive is written to `dist/`. Set `ALPINE_VERSION`, `ALPINE_MIRROR`, or
-`TARGET_ARCH` to customize the build.
+Build outputs are written to `dist/`. Set `ALPINE_VERSION`, `ALPINE_MIRROR`,
+or `TARGET_ARCH` to customize a build.
 
 ## Repair workflow
 

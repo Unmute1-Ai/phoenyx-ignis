@@ -7,6 +7,7 @@
 - iwd Wi-Fi manager
 - policy-gated Windows Boot Manager entry repair
 - signed receipt envelope and CI
+- reproducible bootable ISO build
 
 ## 0.2 — Safer recovery
 
@@ -14,7 +15,7 @@
 - encrypted receipt export
 - automatic ESP discovery with ambiguity handling
 - BitLocker-aware, read-only Windows inspection
-- reproducible ISO and USB image builds
+- reproducible raw USB image build
 
 ## 0.3 — Extensibility
 

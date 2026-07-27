@@ -1,0 +1,9 @@
+{
+  "allowed_primitives": ["repair.windows.bootmanager_entry"],
+  "require_approval": true,
+  "constraints": {
+    "repair.windows.bootmanager_entry": {
+      "require_uefi": true
+    }
+  }
+}

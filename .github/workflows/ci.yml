@@ -37,3 +37,22 @@ jobs:
             python3 -m pip install --break-system-packages --no-deps /tmp/phoenyx-ignis
             ignis --help
           '
+
+  bootable-iso:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Phoenyx Ignis ISO on Alpine
+        run: |
+          mkdir -p artifacts
+          docker run --rm -v "$PWD:/src" alpine:3.20 sh -euxc '
+            cp -R /src /work
+            cd /work
+            ./build-iso.sh
+            cp dist/*phoenyx*.iso dist/*phoenyx*.iso.sha256 /src/artifacts/
+          '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phoenyx-ignis-iso
+          path: artifacts/
+          if-no-files-found: error

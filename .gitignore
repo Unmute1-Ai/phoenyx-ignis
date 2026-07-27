@@ -7,6 +7,7 @@ __pycache__/
 build/
 dist/
 rootfs/
+.iso-work/
 artifacts/
 *.receipt.json
 machine-twin.json
