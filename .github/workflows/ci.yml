@@ -45,7 +45,7 @@ jobs:
       - name: Build Phoenyx Ignis ISO on Alpine
         run: |
           mkdir -p artifacts
-          docker run --rm -v "$PWD:/src" alpine:3.20 sh -euxc '
+          docker run --rm -v "$PWD:/src" -e APORTS_REPO=https://github.com/alpinelinux/aports.git alpine:3.20 sh -euxc '
             cp -R /src /work
             cd /work
             ./build-iso.sh
