@@ -13,6 +13,7 @@ command -v apk >/dev/null 2>&1 || {
 ALPINE_BRANCH="${ALPINE_BRANCH:-3.20-stable}"
 ALPINE_VERSION="${ALPINE_VERSION:-3.20}"
 ALPINE_MIRROR="${ALPINE_MIRROR:-https://dl-cdn.alpinelinux.org/alpine}"
+APORTS_REPO="${APORTS_REPO:-https://gitlab.alpinelinux.org/alpine/aports.git}"
 TARGET_ARCH="${TARGET_ARCH:-x86_64}"
 PROJECT_DIR="$PWD"
 WORK_DIR="${WORK_DIR:-$PWD/.iso-work}"
@@ -34,8 +35,7 @@ if ! find /root/.abuild -name '*.rsa' -print -quit 2>/dev/null | grep -q .; then
 fi
 
 if [ ! -d "$APORTS_DIR/.git" ]; then
-  git clone --depth 1 --branch "$ALPINE_BRANCH" \
-    https://gitlab.alpinelinux.org/alpine/aports.git "$APORTS_DIR"
+  git clone --depth 1 --branch "$ALPINE_BRANCH" "$APORTS_REPO" "$APORTS_DIR"
 fi
 
 cp packaging/mkimg.phoenyx.sh "$APORTS_DIR/scripts/"
