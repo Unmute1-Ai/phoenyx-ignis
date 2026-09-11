@@ -1,5 +1,7 @@
 # Phoenyx Ignis
 
+[Portfolio](https://github.com/Unmute1-Ai/Unmute1ai#readme) · [Engineering](https://github.com/Unmute1-Ai/U1Ai#readme) · [Security evidence](https://github.com/Unmute1-Ai/glass-box#readme)
+
 Phoenyx Ignis is a small, auditable recovery environment built on Alpine Linux.
 It inventories a machine, connects to Wi-Fi, evaluates repair policy, performs
 explicit recovery primitives, and writes signed repair receipts.
