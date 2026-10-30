@@ -1,0 +1,7 @@
+# Autobuild repo policy — auto-detected from GitHub settings on 2026-10-30.
+repository: Unmute1-Ai/phoenyx-ignis
+default_branch: main
+merge:
+  # GitHub allows merge commit, squash, and rebase; squash chosen for setup PRs.
+  method: squash
+  require_human_merge: true
